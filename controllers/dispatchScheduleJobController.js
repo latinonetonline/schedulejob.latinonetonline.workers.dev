@@ -6,14 +6,21 @@ class DispatchScheduleJobController {
     }
 
     dispatch(request){
-        console.log("Start Dispatch");
+        console.log("Start Dispatch Controller");
 
         const url = new URL(request.url);
 
         let workflow = url.searchParams.get("workflow");
-        let job = url.searchParams.get("job");
 
+        console.log("Workflow name received: " + workflow)
+        
+        let job = url.searchParams.get("job");
+        
+        console.log("Job id received: " + job)
+        
         this.service.dispatch(workflow, job);
+
+        console.log("End Dispatch Controller");
     }
 }
 
