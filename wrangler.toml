@@ -1,0 +1,7 @@
+name = "schedulejob"
+type = "webpack"
+
+account_id = "2a17579647cb29d59a5fb80015aafaf6"
+workers_dev = true
+route = ""
+zone_id = ""
