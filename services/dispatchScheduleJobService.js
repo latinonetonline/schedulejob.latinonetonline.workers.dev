@@ -3,7 +3,7 @@ class DispatchScheduleJobService {
     async dispatch(workflow, job) {
 
         await fetch('https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches', {
-            method = 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/vnd.github.v3+json',
@@ -16,7 +16,7 @@ class DispatchScheduleJobService {
                     "idJob": job
                 }
             })
-        })
+        });
     }
 }
 
