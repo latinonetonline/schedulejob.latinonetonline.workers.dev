@@ -15,7 +15,7 @@ class DispatchScheduleJobService {
                     "workflowName": workflow,
                     "idJob": job
                 }
-            }),
+            })
         })
     }
 }
