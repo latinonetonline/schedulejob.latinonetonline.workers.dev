@@ -7,7 +7,7 @@ class DispatchScheduleJobService {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/vnd.github.v3+json',
-                'Authorization': `Bearer ${GITHUB_TOKEN}`
+                'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
             },
             body: JSON.stringify({
                 "event_type": "dispatch-workflow-job",
