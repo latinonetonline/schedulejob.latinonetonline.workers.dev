@@ -25,7 +25,7 @@ class DispatchScheduleJobService {
                 })
             }).then(res => {
                 console.log("Receive Response");
-                console.log("StatusCode: " + 204);
+                console.log("StatusCode: " + res.status);
 
                 if (res.status != 204) {
                     console.error("The GitHub api did not return 204. There was an error")
