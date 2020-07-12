@@ -35,13 +35,13 @@ async function handleRequest(request) {
     }
     console.log("Send Fetch");
 
-    const response = await fetch(url, init)
+    const fetchResponse = await fetch(url, init)
 
-    console.log("Status Code: " + response.status);
+    console.log("Status Code: " + fetchResponse.status);
 
     return new Response('{}', {
         status: 200,
-        statusText: response.statusText,
+        statusText: fetchResponse.statusText,
         headers: {
             'content-type': 'application/json',
         },
