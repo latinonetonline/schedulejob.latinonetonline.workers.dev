@@ -1,6 +1,6 @@
 class DispatchScheduleJobService {
 
-    dispatch(workflow, job) {
+    async dispatch(workflow, job) {
 
         console.log("Start Dispatch Service");
         // let ghToken = process.env.GITHUB_TOKEN;
@@ -9,7 +9,7 @@ class DispatchScheduleJobService {
 
             console.log("Send Fetch");
 
-            fetch('https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches', {
+            const res = await fetch('https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,14 +23,15 @@ class DispatchScheduleJobService {
                         "idJob": job
                     }
                 })
-            }).then(res => {
-                console.log("Receive Response");
-                console.log("StatusCode: " + res.status);
-
-                if (res.status != 204) {
-                    console.error("The GitHub api did not return 204. There was an error")
-                }
             });
+
+            console.log("Receive Response");
+            console.log("StatusCode: " + res.status);
+
+            if (res.status != 204) {
+                console.error("The GitHub api did not return 204. There was an error")
+            }
+
 
         }
         else {

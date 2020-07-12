@@ -5,7 +5,7 @@ class DispatchScheduleJobController {
         this.service = new DispatchScheduleJobService();
     }
 
-    dispatch(request){
+    async dispatch(request){
         console.log("Start Dispatch Controller");
 
         const url = new URL(request.url);
@@ -17,8 +17,8 @@ class DispatchScheduleJobController {
         let job = url.searchParams.get("job");
         
         console.log("Job id received: " + job)
-        
-        this.service.dispatch(workflow, job);
+
+        await this.service.dispatch(workflow, job);
 
         console.log("End Dispatch Controller");
     }
