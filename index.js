@@ -17,7 +17,7 @@ async function handleRequest(request) {
 
     console.log("Job id received: " + job)
 
-
+    console.log(GITHUB_TOKEN);
     const init = {
         method: 'POST',
         headers: {
