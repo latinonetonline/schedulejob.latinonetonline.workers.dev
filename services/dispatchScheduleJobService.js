@@ -3,16 +3,16 @@ class DispatchScheduleJobService {
     dispatch(workflow, job) {
 
         console.log("Start Dispatch Service");
-        let ghToken = process.env.GITHUB_TOKEN;
+        // let ghToken = process.env.GITHUB_TOKEN;
 
-        if (ghToken) {
+        if (GITHUB_TOKEN) {
 
             fetch('https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/vnd.github.v3+json',
-                    'Authorization': `Bearer ${ghToken}`
+                    'Authorization': `Bearer ${GITHUB_TOKEN}`
                 },
                 body: JSON.stringify({
                     "event_type": "dispatch-workflow-job",
