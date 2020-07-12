@@ -7,6 +7,8 @@ class DispatchScheduleJobService {
 
         if (GITHUB_TOKEN) {
 
+            console.log("Send Fetch");
+
             fetch('https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches', {
                 method: 'POST',
                 headers: {
@@ -22,6 +24,9 @@ class DispatchScheduleJobService {
                     }
                 })
             }).then(res => {
+                console.log("Receive Response");
+                console.log("StatusCode: " + 204);
+
                 if (res.status != 204) {
                     console.error("The GitHub api did not return 204. There was an error")
                 }
