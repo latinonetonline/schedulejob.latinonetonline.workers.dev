@@ -12,7 +12,7 @@ async function handleRequest(request) {
     const r = new Router()
     const controller = new DispatchScheduleJobController()
     // Replace with the approriate paths and handlers
-    r.get('.*/dispatch', request => await controller.dispatch(request))
+    r.get('.*/dispatch', async request => await controller.dispatch(request))
 
     const resp = await r.route(request)
     return resp
