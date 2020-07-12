@@ -40,7 +40,7 @@ async function handleRequest(request) {
     console.log("Status Code: " + fetchResponse.status);
 
     return new Response('{}', {
-        status: 200,
+        status: fetchResponse.status,
         statusText: fetchResponse.statusText,
         headers: {
             'content-type': 'application/json',
