@@ -1,29 +1,62 @@
-const Router = require('./router')
-const DispatchScheduleJobController = require("./controllers/dispatchScheduleJobController")
-
 /**
  * Example of how router can be used in an application
  *  */
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
+    return event.respondWith(handleRequest(event.request))
 })
 
 async function handleRequest(request) {
-    const r = new Router()
-    const controller = new DispatchScheduleJobController()
-    // Replace with the approriate paths and handlers
-    r.get('.*/dispatch', async request => await controller.dispatch(request))
 
-    const resp = await r.route(request)
-    return resp
+    const url = new URL(request.url);
+
+    let workflow = url.searchParams.get("workflow");
+
+    console.log("Workflow name received: " + workflow)
+
+    let job = url.searchParams.get("job");
+
+    console.log("Job id received: " + job)
+
+
+    const init = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${GITHUB_TOKEN}`
+        },
+        body: JSON.stringify({
+            "event_type": "dispatch-workflow-job",
+            "client_payload": {
+                "workflowName": workflow,
+                "idJob": job
+            }
+        })
+    }
+    const response = await fetch(url, init)
+    const results = await gatherResponse(response)
+    return new Response(results, init)
 }
 
-// We support the GET, POST, HEAD, and OPTIONS methods from any origin,
-// and accept the Content-Type header on requests. These headers must be
-// present on all responses to all CORS requests. In practice, this means
-// all responses to OPTIONS or POST requests.
-const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+/**
+ * gatherResponse awaits and returns a response body as a string.
+ * Use await gatherResponse(..) in an async function to get the response body
+ * @param {Response} response
+ */
+async function gatherResponse(response) {
+    const { headers } = response
+    const contentType = headers.get('content-type') || ''
+    if (contentType.includes('application/json')) {
+        return JSON.stringify(await response.json())
+    } else if (contentType.includes('application/text')) {
+        return await response.text()
+    } else if (contentType.includes('text/html')) {
+        return await response.text()
+    } else {
+        return await response.text()
+    }
 }
+
+
+const url = 'https://api.github.com/repos/latinonetonline/LatinoNETOnline.ScheduleJob/dispatches';
+
