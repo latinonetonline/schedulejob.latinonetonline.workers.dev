@@ -10,13 +10,13 @@ async function handleRequest(request) {
 
     const url = new URL(request.url);
 
-    let workflow = url.searchParams.get("workflow");
+    let handler = url.searchParams.get("handler");
 
-    console.log("Workflow name received: " + workflow)
+    console.log("Handler name received: " + handler)
 
-    let job = url.searchParams.get("job");
+    let objectScheduled = url.searchParams.get("objectScheduled");
 
-    console.log("Job id received: " + job)
+    console.log("Object Scheduled id received: " + objectScheduled)
 
     const init = {
         method: 'POST',
@@ -29,8 +29,8 @@ async function handleRequest(request) {
         body: JSON.stringify({
             "event_type": "dispatch-workflow-job",
             "client_payload": {
-                "workflowName": workflow,
-                "idJob": job
+                "handlerName": handler,
+                "objectScheduledId": objectScheduled
             }
         })
     }
