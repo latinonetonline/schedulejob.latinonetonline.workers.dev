@@ -18,6 +18,10 @@ async function handleRequest(request) {
 
     console.log("Object Scheduled id received: " + objectScheduled)
 
+    let cronId = url.searchParams.get("cronId");
+
+    console.log("Cron id received: " + cronId)
+
     const init = {
         method: 'POST',
         headers: {
@@ -30,7 +34,8 @@ async function handleRequest(request) {
             "event_type": "dispatch-workflow-job",
             "client_payload": {
                 "handlerName": handler,
-                "objectScheduledId": objectScheduled
+                "objectScheduledId": objectScheduled,
+                "cronId": cronId
             }
         })
     }
